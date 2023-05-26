@@ -81,6 +81,7 @@ else:
                              "site-packages","mnemosyne")
     data_files = [(os.path.join(sys.exec_prefix, "share", "applications"), ["mnemosyne.desktop"]),
                   (os.path.join(sys.exec_prefix, "share", "icons"), ["pixmaps/mnemosyne.png"])]
+# Add the following code after the setup() function
 if sys.argv[1] == 'install':
     # Retrieve the value of the --prefix parameter
     prefix = ''
@@ -92,12 +93,11 @@ if sys.argv[1] == 'install':
     # Update the paths of data_files using the --prefix parameter
     if prefix:
         new_data_files = []
-        for data_path, files in setup_kwargs['data_files']:
+        for data_path, files in data_files:
             new_data_path = os.path.join(prefix, data_path)
             new_files = [os.path.join(new_data_path, file) for file in files]
             new_data_files.append((new_data_path, new_files))
-        setup_kwargs['data_files'] = new_data_files
-
+        data_files = new_data_files
 # Translations.
 if sys.platform != "win32":
     for mo in [x for x in glob.glob(os.path.join("mo", "*"))
