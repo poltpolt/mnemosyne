@@ -98,6 +98,8 @@ if sys.argv[1] == 'install':
             new_files = [os.path.join(new_data_path, file) for file in files]
             new_data_files.append((new_data_path, new_files))
         data_files = new_data_files
+print("Modified data_files:", data_files)
+
 # Translations.
 if sys.platform != "win32":
     for mo in [x for x in glob.glob(os.path.join("mo", "*"))
